@@ -8,6 +8,7 @@ const productSchema = require('./models/Product')
 
 // Requiring routes
 const productsRoutes = require('./routes/productsRoutes')
+const usersRoutes = require('./routes/usersRoutes')
 
 // Data base connection require
 const conn = require('./db/conn')
@@ -21,12 +22,17 @@ app.set('view engine', 'handlebars')
 
 app.use(express.static('public'))
 
+app.use(express.urlencoded({extended:true}))
+app.use(express.json())
+
 // Routes middlewares
 app.use('/products', productsRoutes)
+app.use('/', usersRoutes)
 
+app.get('/', (req,res)=>{res.render('products/home')})
 
 conn
-.sync({force:true})
+.sync()
 .then(()=>{
     console.log('Banco de dados autenticado!')
     app.listen(3000)
