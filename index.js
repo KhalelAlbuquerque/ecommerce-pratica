@@ -2,6 +2,10 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 
+// Calling models
+const userSchema = require('./models/User')
+const productSchema = require('./models/Product')
+
 // Requiring routes
 const productsRoutes = require('./routes/productsRoutes')
 
@@ -22,7 +26,7 @@ app.use('/products', productsRoutes)
 
 
 conn
-.sync()
+.sync({force:true})
 .then(()=>{
     console.log('Banco de dados autenticado!')
     app.listen(3000)
