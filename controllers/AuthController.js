@@ -62,10 +62,58 @@ module.exports = class AuthController{
     
     static login(req,res){
         if(req.session.userid){
+            console.log('Voce ja esta logado!')
             res.redirect('/')
             return
         }
         res.render('auth/login')
+    }
+
+    static async loginPost(req,res){
+        const {email, password} = req.body
+
+        //Check if email exists in database
+        const userCheckedEmail = await userSchema.findOne({raw:true, where:{email:email}})
+        if(!userCheckedEmail){
+            // SUBSTITUIR POR FLASH MESSAGES
+            //ESTUDAR --REQUISITO
+            console.log('Email incorreto')
+            res.redirect('/login')
+            return
+        }
+
+        //Check if password match
+        try{
+            const matchedPassword = bcrypt.compareSync(password, userCheckedEmail.password)
+
+            if(matchedPassword){
+                req.session.userid=userCheckedEmail.id
+                req.session.save(()=>{
+                    // SUBSTITUIR POR FLASH MESSAGES
+                    //ESTUDAR --REQUISITO
+                    console.log('passou!')
+                    res.redirect('/')
+                })
+            }else{
+                // SUBSTITUIR POR FLASH MESSAGES
+                console.log('senha incorrreta')
+            }
+
+        }catch(err){
+            // SUBSTITUIR POR FLASH MESSAGES
+            console.log("ERRO: "+err)
+        }
+    }
+
+    static logout(req,res){
+        if(!req.session.userid){
+            console.log('Você deve fazer o login para continuar')
+            res.redirect('/login')
+            return
+        }
+
+        req.session.destroy()
+        res.redirect('/')
     }
 
 }

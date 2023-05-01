@@ -1,3 +1,32 @@
-<h1>Home products acessada</h1>
-<a href="/register">Registrar</a>
-<a href="/login">Login</a>
+<div class="home-container">
+    <h1>Home products acessada</h1>
+
+    <form action="/products/search" method="get">
+        <input type="text" class="input-form" placeholder="O que procura?">
+        <input type="submit" value="Procurar">
+
+        <select name="category">
+            <option value="" selected>Categoria</option>
+            <option value="carro">Carros</option>
+            <option value="eletronico">Eletronicos</option>
+            <option value="casa">Itens para Casa</option>
+            <option value="outros">Outros</option>
+        </select>
+    </form>
+
+    {{#each products}}
+        {{#with this}}
+            <div class="product-container-home">
+                <div class="product-info-home">
+                    <h2>{{name}}</h2>
+                    <p>Enviado por {{User.name}}</p>
+                </div>
+
+                <div class="price-actions">
+                    <h3><span>R$ {{price}},00</span></h3>
+                    <a href="/products/{{id}}">Infos produto</a>
+                </div>
+                </div>
+        {{/with}}
+    {{/each}}
+</div>
