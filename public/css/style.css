@@ -197,6 +197,12 @@ select option:first-child{
 
 .home-container h1{
     text-align: center;
+    margin-bottom: .3em;
+}
+
+.home-container p{
+    margin-top:0;
+    text-align: center;
 }
 
 .product-container-home{
@@ -243,10 +249,26 @@ select option:first-child{
     color: white;
 }
 
-.home-container select{
+.search-filters{
+    width: 100%;
+    display: flex;
     margin: auto;
-    width: 40%;
-    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-filters select{
+    width: 60%;
+}
+
+.search-filters a{
+    display: block;
+    text-decoration: none;
+    padding: .5em 1em;
+    background-color: rgb(231, 158, 23);
+    color: black;
+    border-radius: 5px;
+    margin-left: 15px;
 }
 
 .home-container select option{

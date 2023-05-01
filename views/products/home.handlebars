@@ -1,17 +1,35 @@
 <div class="home-container">
-    <h1>Home products acessada</h1>
+    {{#if qtyFound}}
 
-    <form action="/products/search" method="get">
-        <input type="text" class="input-form" placeholder="O que procura?">
+        
+        <h1>Buscando por: <span>{{search}}</span></h1>
+        <p>Foram achados <span>{{qtyFound}}</span> resultados</p>
+
+    {{else}}
+
+        {{!-- No search --}}
+        <h1>Bem vindo ao <span>Bazaar</span>!</h1>
+        <p>Busque por algo</p>
+
+    {{/if}}
+
+    <form action="/products/" method="get">
+        <input type="text" class="input-form" name="search" placeholder="O que procura?">
         <input type="submit" value="Procurar">
 
-        <select name="category">
-            <option value="" selected>Categoria</option>
-            <option value="carro">Carros</option>
-            <option value="eletronico">Eletronicos</option>
-            <option value="casa">Itens para Casa</option>
-            <option value="outros">Outros</option>
-        </select>
+        
+        <div class="search-filters">
+            <select name="category">
+                <option value="" selected>Categoria</option>
+                <option value="Carros">Carros</option>
+                <option value="Eletronicos">Eletronicos</option>
+                <option value="Casas">Itens para Casa</option>
+                <option value="Outros">Outros</option>
+            </select>
+
+            <a href="/">Limpar</a>
+        </div>  
+
     </form>
 
     {{#each products}}
