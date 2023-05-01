@@ -91,6 +91,24 @@ module.exports = class ProductController{
 
         console.log('Produto deletado!')
         res.redirect('/users/dashboard')
+    }
+
+
+    static async viewProduct(req,res){
+
+        const id = req.params.id
+
+        const product = await productSchema.findOne({include:userSchema, where:{id:id}})
+
+        if(!product){
+            console.log("Produto não encontrado!")
+            res.redirect('/')
+            return
+        }
+
+        console.log('Produto encontrado!')
+        console.log(product.get({plain:true}))
+        res.render('products/view', {product:product.get({plain:true})})
 
     }
 

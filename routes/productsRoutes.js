@@ -13,4 +13,6 @@ router.post('/edit', checkAuth, ProductController.updateProductPost)
 
 router.get('/delete', checkAuth, ProductController.deleteProduct)
 
+router.get('/:id', ProductController.viewProduct)
+
 module.exports = router
