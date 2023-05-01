@@ -1,0 +1,31 @@
+<div class="form-container">
+    <h2>Edite seu produto abaixo!</h2>
+
+    <form action="/products/edit" class="form" method="post">
+
+        <div class="input-form">
+            <label for="name">Nome:</label>
+            <input type="text" name="name" value="{{product.name}}" placeholder="Digite o nome do produto" required>
+        </div>
+
+        <div class="input-form">
+            <label for="category">Categoria:</label>
+            <select name="category" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="carro">Carros</option>
+                <option value="eletronico">Eletronicos</option>
+                <option value="casa">Itens para Casa</option>
+                <option value="outros">Outros</option>
+            </select>
+        </div>
+
+        <div class="input-form">
+            <label for="price">Preço:</label>
+            <input type="number" name="price" value="{{product.price}}" placeholder="Digite o preço" required>
+        </div>
+
+        <input type="hidden" name="id" value="{{product.id}}">
+        <input type="submit" value="Atualizar">
+
+    </form>
+</div>
