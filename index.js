@@ -11,6 +11,7 @@ const productSchema = require('./models/Product')
 // Requiring routes
 const productsRoutes = require('./routes/productsRoutes')
 const authRoutes = require('./routes/authRoutes')
+const userRoutes = require('./routes/usersRoutes')
 
 // Data base connection require
 const conn = require('./db/conn')
@@ -41,11 +42,25 @@ app.use(session({
 }))
 
 
+app.use((req,res,next)=>{
+
+    if(req.session.userid){
+        res.locals.session = req.session
+    }
+
+    next()
+
+})
+
+
 // Routes middlewares
 app.use('/products', productsRoutes)
+app.use('/users', userRoutes)
 app.use('/', authRoutes)
 
-app.get('/', (req,res)=>{res.render('products/home', {sessionUserId: req.session.userid})})
+
+const ProductController = require('./controllers/ProductController')
+app.get('/', ProductController.showProducts)
 
 conn
 .sync()

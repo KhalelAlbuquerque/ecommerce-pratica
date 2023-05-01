@@ -11,18 +11,21 @@
     
     <nav>
         <a href="/" class="logo-container">
-            <img src="/img/imagem_2023-04-29_111915771-removebg-preview.png" alt="Logo">
+            <img src="/img/imagem_2023-04-30_144135573-removebg-preview.png" alt="Logo">
         </a>
+        <div class="navbar-routes">
+            
+            <a href="/">Produtos</a>
+            {{#if session.id}}
+                <a href="/users/dashboard">Dashboard</a>
+                <a href="/logout">Deslogar</a>
+            {{else}}
+                <a href="/register">Registrar</a>
+                <a href="/login">Login</a>
+            {{/if}}
 
-        {{#if sessionUserId}}
-            <a href="/">Produtos</a>
-            <a href="/dashboard">Dashboard</a>
-            <a href="/logout">Deslogar</a>
-        {{else}}
-            <a href="/">Produtos</a>
-            <a href="/register">Registrar</a>
-            <a href="/login">Login</a>
-        {{/if}}
+            <a href="/products/create">Anunciar produto</a>
+        </div>
     </nav>
 
     <main>

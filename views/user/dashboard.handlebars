@@ -1,0 +1,26 @@
+<div class="dashboard-container">
+    <div class="dashboard-title">
+        <h1>Dashboard do {{user.name}}</h1>
+    </div>
+
+    <div class="products-container-dashboard">
+            {{#each user.Products}}
+                {{#with this}} 
+                <div class="product-info">
+                    <div class="product-item">
+                        <h3><span>{{name}}</span></h3>
+                        <p>Preço: <span>R$ {{price}}</span></p>
+                    </div>
+                    <div class="actions">
+                        
+                        <form action="/products/edit" method="get">
+                            <input type="hidden" name="id" value="{{id}}">
+                            <input type="submit" value="Editar prod">
+                        </form>
+                        <a href="#">Excluir produto</a>
+                    </div>
+                </div>
+                {{/with}}
+            {{/each}}
+    </div>
+</div>
