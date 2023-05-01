@@ -9,5 +9,8 @@ router.get('/create', checkAuth, ProductController.createProduct)
 router.post('/create', checkAuth, ProductController.createProductPost)
 
 router.get('/edit', checkAuth, ProductController.updateProduct)
+router.post('/edit', checkAuth, ProductController.updateProductPost)
+
+router.get('/delete', checkAuth, ProductController.deleteProduct)
 
 module.exports = router

@@ -21,10 +21,10 @@
 
         <div class="input-form">
             <label for="price">Preço:</label>
-            <input type="number" name="price" value="{{product.name}}" placeholder="Digite o preço" required>
+            <input type="number" name="price" value="{{product.price}}" placeholder="Digite o preço" required>
         </div>
 
-
+        <input type="hidden" name="id" value="{{product.id}}">
         <input type="submit" value="Atualizar">
 
     </form>

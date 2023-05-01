@@ -47,7 +47,50 @@ module.exports = class ProductController{
 
     static async updateProductPost(req,res){
 
+        const UserId = req.session.userid
+        const {name, category, price, id} = req.body
+
+        const foundProduct = await productSchema.findOne({where:{id:id, UserId:UserId}})
+
+        if(!foundProduct){
+            console.log('Produto não encontrado')
+            res.redirect('/users/dashboard')
+            return
+        }
+
+        const updatedProduct = {
+            id,
+            name,
+            category,
+            price,
+            UserId
+        }
+
+        await productSchema.update(updatedProduct, {where:{id:id}})
+        console.log('Produto atulaizado!')
+
+        res.redirect('/users/dashboard')
+
+    }
+
+
+    static async deleteProduct(req,res){
+
+        const id = req.query.id
+        const UserId = req.session.userid
+
+        const foundProduct = await productSchema.findOne({where:{id:id, UserId:UserId}})
         
+        if(!foundProduct){
+            console.log('Produto não encontrado')
+            res.redirect('/users/dashboard')
+            return
+        }
+
+        await productSchema.destroy({where:{id:id, UserId:UserId}})
+
+        console.log('Produto deletado!')
+        res.redirect('/users/dashboard')
 
     }
 
