@@ -120,6 +120,7 @@ nav{
 
 .home-container input,
 .form-container input,
+textarea,
 select{
     color: white;
     width: 100%;
@@ -130,6 +131,14 @@ select{
     background-color: black;
     border: 1px solid rgb(231, 158, 23);
     margin: 6px 0 10px 0;
+}
+
+textarea{
+    height: 100px;
+}
+
+textarea::placeholder{
+    color: rgb(146, 104, 24);
 }
 
 select option:first-child{
@@ -336,6 +345,7 @@ select option:first-child{
     font-size: 24px;
     font-weight: bold;
 }
+
 
 .product-description{
     width: 100%;

@@ -18,7 +18,11 @@ const User = db.define('User',{
         require:true,
         allowNull:false
     },
-
+    phone:{
+        type:DataTypes.STRING,
+        require:true,
+        allowNull:false
+    },
 })
 
 module.exports = User

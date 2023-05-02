@@ -84,11 +84,11 @@ module.exports = class ProductController{
     
     static async createProductPost (req,res){
 
-        const {name, category, price} = req.body
+        const {name, category, description, price} = req.body
         const userId = req.session.userid
 
         const newProduct = {
-            name, category, price, UserId:userId
+            name, category, description, price, UserId:userId
         }
         await productSchema.create(newProduct)
 
@@ -115,7 +115,7 @@ module.exports = class ProductController{
     static async updateProductPost(req,res){
 
         const UserId = req.session.userid
-        const {name, category, price, id} = req.body
+        const {name, category, description, price, id} = req.body
 
         const foundProduct = await productSchema.findOne({where:{id:id, UserId:UserId}})
 
@@ -129,6 +129,7 @@ module.exports = class ProductController{
             id,
             name,
             category,
+            description,
             price,
             UserId
         }
@@ -173,8 +174,6 @@ module.exports = class ProductController{
             return
         }
 
-        req.flash('message','Produto encontrado!')
-        req.flash('message',product.get({plain:true}))
         res.render('products/view', {product:product.get({plain:true})})
     }
 
