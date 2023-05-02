@@ -14,7 +14,7 @@ module.exports = class AuthController{
 
     static async registerPost(req,res){
 
-        const {name, email, password, passwordconfirm} = req.body
+        const {name, email, password, passwordconfirm, phone} = req.body
 
 
         //Checking if email exists in database
@@ -39,7 +39,8 @@ module.exports = class AuthController{
         const newUser = {
             name,
             email,
-            password:hash
+            password:hash,
+            phone
         }
         
         try{

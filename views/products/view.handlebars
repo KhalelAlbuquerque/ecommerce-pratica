@@ -1,11 +1,11 @@
 <div class="info-view-container">
     <h1>Informações do produto <span>{{product.name}}</span></h1>
 
-    <p class="product-info-view"> <span>DESCRICAO:</span></p>
-    <p class="product-description">DESCRICAO</p>
+    <p class="product-info-view"> <span>Descrição:</span></p>
+    <p class="product-description">{{product.description}}</p>
 
     <p class="product-info-view"><span>Preço: </span>{{product.price}}</p>
 
     <p class="product-info-view"><span>Enviado por: </span>{{product.User.name}}</p>
-    <p class="product-info-view"><span>Telefone para contato: </span>TELEFONE</p>
+    <p class="product-info-view"><span>Telefone para contato: </span>{{product.User.phone}}</p>
 </div>

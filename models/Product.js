@@ -15,6 +15,11 @@ const Product = db.define('Product', {
         requie:true,
         allowNull:false
     },
+    description:{
+        type:DataTypes.STRING,
+        requie:true,
+        allowNull:false
+    },
     price:{
         type:DataTypes.FLOAT,
         requie:true,
