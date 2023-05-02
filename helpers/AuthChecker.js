@@ -4,8 +4,8 @@ module.exports = class AuthChecker {
             next()
         }
         else{
+            req.flash('message', 'Faca o login para continuar')
             res.redirect('/login')
-            console.log('Faca o login para continuar')
         }
     }
 }

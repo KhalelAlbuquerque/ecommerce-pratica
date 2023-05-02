@@ -2,6 +2,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const session = require('express-session')
+const flash = require("express-flash")
 
 
 // Calling models
@@ -27,6 +28,8 @@ app.use(express.static('public'))
 
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
+
+app.use(flash())
 
 app.use(session({
     name:'session',

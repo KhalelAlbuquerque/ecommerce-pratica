@@ -102,7 +102,7 @@ module.exports = class ProductController{
         const product = await productSchema.findOne({raw:true, where:{id:id}})
 
         if(product.UserId!=req.session.userid){
-            console.log('Você não pode alterar esse produto!')
+            req.flash('message','Você não pode alterar esse produto!')
             res.redirect('/')
             return
         }
@@ -120,7 +120,7 @@ module.exports = class ProductController{
         const foundProduct = await productSchema.findOne({where:{id:id, UserId:UserId}})
 
         if(!foundProduct){
-            console.log('Produto não encontrado')
+            req.flash('message','Produto não encontrado')
             res.redirect('/users/dashboard')
             return
         }
@@ -134,7 +134,7 @@ module.exports = class ProductController{
         }
 
         await productSchema.update(updatedProduct, {where:{id:id}})
-        console.log('Produto atulaizado!')
+        req.flash('message','Produto atulaizado!')
 
         res.redirect('/users/dashboard')
 
@@ -149,14 +149,14 @@ module.exports = class ProductController{
         const foundProduct = await productSchema.findOne({where:{id:id, UserId:UserId}})
         
         if(!foundProduct){
-            console.log('Produto não encontrado')
+            req.flash('message','Produto não encontrado')
             res.redirect('/users/dashboard')
             return
         }
 
         await productSchema.destroy({where:{id:id, UserId:UserId}})
 
-        console.log('Produto deletado!')
+        req.flash('message','Produto deletado!')
         res.redirect('/users/dashboard')
     }
 
@@ -168,13 +168,13 @@ module.exports = class ProductController{
         const product = await productSchema.findOne({include:userSchema, where:{id:id}})
 
         if(!product){
-            console.log("Produto não encontrado!")
+            req.flash('message',"Produto não encontrado!")
             res.redirect('/')
             return
         }
 
-        console.log('Produto encontrado!')
-        console.log(product.get({plain:true}))
+        req.flash('message','Produto encontrado!')
+        req.flash('message',product.get({plain:true}))
         res.render('products/view', {product:product.get({plain:true})})
     }
 

@@ -5,7 +5,7 @@ module.exports = class AuthController{
 
     static register(req,res){
         if(req.session.userid){
-            console.log('Voce ja esta logado!')
+            req.flash('message', 'Você já está logado!')
             res.redirect('/')
             return
         }
@@ -20,14 +20,14 @@ module.exports = class AuthController{
         //Checking if email exists in database
         const checkEmail = await userSchema.findOne({where:{email:email}})
         if(checkEmail){
-            console.log('Email já cadastrado!')
+            req.flash('message', 'Email já cadastrado!')
             res.render('users/register')
             return
         }
 
         //Checking if password and confirm matches
         if(password!=passwordconfirm){
-            console.log('As senhas não são iguais')
+            creq.flash('message', 'As senhas não são iguais')
             res.render('users/register')
             return
         }
@@ -48,7 +48,7 @@ module.exports = class AuthController{
             req.session.userid = user.id
 
             req.session.save(()=>{
-                console.log("Usuario cadastrado!")
+                req.flash('message', "Usuario cadastrado!")
 
                 res.redirect('/')
             })
@@ -75,9 +75,8 @@ module.exports = class AuthController{
         //Check if email exists in database
         const userCheckedEmail = await userSchema.findOne({raw:true, where:{email:email}})
         if(!userCheckedEmail){
-            // SUBSTITUIR POR FLASH MESSAGES
-            //ESTUDAR --REQUISITO
-            console.log('Email incorreto')
+
+            req.flash('message', 'Email incorreto')
             res.redirect('/login')
             return
         }
@@ -89,25 +88,24 @@ module.exports = class AuthController{
             if(matchedPassword){
                 req.session.userid=userCheckedEmail.id
                 req.session.save(()=>{
-                    // SUBSTITUIR POR FLASH MESSAGES
-                    //ESTUDAR --REQUISITO
-                    console.log('passou!')
+
+                    req.flash('message', 'Login efetuado!')
                     res.redirect('/')
                 })
             }else{
-                // SUBSTITUIR POR FLASH MESSAGES
-                console.log('senha incorrreta')
+                req.flash('message', 'Senha incorreta!')
+                res.redirect('/login')
             }
 
         }catch(err){
-            // SUBSTITUIR POR FLASH MESSAGES
-            console.log("ERRO: "+err)
+
+            console.log(err)
         }
     }
 
     static logout(req,res){
         if(!req.session.userid){
-            console.log('Você deve fazer o login para continuar')
+            req.flash('message','Você deve fazer o login para continuar')
             res.redirect('/login')
             return
         }
