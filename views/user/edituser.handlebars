@@ -1,0 +1,29 @@
+<div class="form-container">
+    <h2>Edite suas informações abaixo!</h2>
+
+    {{#with user}}
+
+        <form action="/users/update" class="form" method="post">
+
+            <div class="input-form">
+                <label for="name">Nome:</label>
+                <input type="text" name="name" placeholder="Digite seu nome" value="{{name}}" required>
+            </div>
+
+            <div class="input-form">
+                <label for="email">E-mail:</label>
+                <input type="email" name="email" placeholder="Digite seu e-mail" value="{{email}}" required>
+            </div>
+
+            <div class="input-form">
+                <label for="phone">Telefone:</label>
+                <input type="number" name="phone" placeholder="Digite seu telefone" value="{{phone}}" required>
+            </div>
+
+            <input type="submit" value="Salvar">
+
+        </form>
+
+    {{/with}}
+
+</div>

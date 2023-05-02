@@ -1,9 +1,13 @@
 <div class="dashboard-container">
     <div class="dashboard-title">
         <h1>Dashboard do {{user.name}}</h1>
+        <a href="/users/update">Editar informações</a>
+        <a href="/users/changepassword">Alterar senha</a>
     </div>
 
     <div class="products-container-dashboard">
+        <h2>Produtos listados por você:</h2>
+        {{#if user.Products}}
             {{#each user.Products}}
                 {{#with this}} 
                 <div class="product-info">
@@ -13,6 +17,10 @@
                     </div>
                     <div class="actions">
                         
+                        <form action="/products/{{id}}" method="get">
+                            <input type="hidden" value="{{id}}">
+                            <input type="submit" value="Informações">
+                        </form>
                         <form action="/products/edit" method="get">
                             <input type="hidden" name="id" value="{{id}}">
                             <input type="submit" value="Editar">
@@ -25,5 +33,15 @@
                 </div>
                 {{/with}}
             {{/each}}
+        {{else}}
+
+            <div class="product-info no-products">
+                <h1>Não há itens listados por você</h1>
+                <a href="/products/create">Adicione um!</a>
+            </div>
+        
+        {{/if}}
+
+
     </div>
 </div>
