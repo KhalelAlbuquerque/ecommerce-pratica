@@ -37,12 +37,12 @@
             <div class="product-container-home">
                 <div class="product-info-home">
                     <h2>{{name}}</h2>
-                    <p>Enviado por {{User.name}}</p>
+                    <p>Enviado por <span>{{User.name}}</span></p>
                 </div>
 
                 <div class="price-actions">
                     <h3><span>R$ {{price}},00</span></h3>
-                    <a href="/products/{{id}}">Infos produto</a>
+                    <a class="info-button" href="/products/{{id}}">Infos produto</a>
                 </div>
                 </div>
         {{/with}}

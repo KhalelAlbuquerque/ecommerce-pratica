@@ -1,6 +1,5 @@
 const userSchema = require('../models/User')
 const productSchema = require('../models/Product')
-const bcrypt = require('bcryptjs')
 
 module.exports = class UserController{
 

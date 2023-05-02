@@ -28,6 +28,12 @@
         </div>
     </nav>
 
+    {{#if messages.message}}
+        <div class="flash-message">
+            <p>{{messages.message}}</p>
+        </div>
+    {{/if}}
+
     <main>
         {{{body}}}
     </main>
