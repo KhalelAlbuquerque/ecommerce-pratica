@@ -81,7 +81,7 @@ module.exports = class AuthController{
             res.redirect('/login')
             return
         }
-
+        
         //Check if password match
         try{
             const matchedPassword = bcrypt.compareSync(password, userCheckedEmail.password)
@@ -111,6 +111,7 @@ module.exports = class AuthController{
             return
         }
 
+        req.flash('message','Desconectado!')
         req.session.destroy()
         res.redirect('/')
     }
